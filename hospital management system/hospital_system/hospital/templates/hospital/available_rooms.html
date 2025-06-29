@@ -1,0 +1,49 @@
+{% extends 'hospital/base.html' %}
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Available Rooms</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" class="mb-4 flex items-center">
+        <input type="text" name="search" placeholder="Search by room number or type"
+               class="w-full md:w-1/2 px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+        <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Search
+        </button>
+    </form>
+
+    <!-- Room List Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border rounded">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border text-left">Room No</th>
+                    <th class="px-4 py-2 border text-left">Type</th>
+                    <th class="px-4 py-2 border text-left">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if rooms %}
+                    {% for room in rooms %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-2 border">{{ room.room_number }}</td>
+                            <td class="px-4 py-2 border">{{ room.room_type }}</td>
+                            <td class="px-4 py-2 border">
+                                {% if room.is_available %}
+                                    <span class="text-green-600 font-semibold">Available</span>
+                                {% else %}
+                                    <span class="text-red-600 font-semibold">Occupied</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center px-4 py-4 border text-gray-500">No rooms found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

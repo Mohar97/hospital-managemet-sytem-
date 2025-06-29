@@ -1,0 +1,13 @@
+{% extends 'hospital/base.html' %}
+{% block content %}
+<div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Confirm Delete</h2>
+  <p>Are you sure you want to delete <strong>{{ employee.name }}</strong>?</p>
+
+  <form method="post" class="mt-6 flex space-x-4">
+    {% csrf_token %}
+    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Yes, Delete</button>
+    <a href="{% url 'view_employees' %}" class="px-4 py-2 rounded border border-gray-300">Cancel</a>
+  </form>
+</div>
+{% endblock %}

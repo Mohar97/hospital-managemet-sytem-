@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare HMS | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .login-container {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        }
+        
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .illustration-img {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="flex flex-col md:flex-row rounded-xl overflow-hidden w-full max-w-4xl login-container">
+        <!-- Left Panel -->
+        <div class="md:w-1/2 gradient-bg flex flex-col items-center justify-center p-8 text-white">
+            <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">MedCare HMS</h1>
+            <p class="text-center mb-8 opacity-90">Hospital Management System</p>
+            <div class="illustration-img w-full max-w-xs">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/975616e0-4a50-4100-815e-8d632fe07ea0.png" alt="Medical professionals analyzing patient data" class="w-full h-auto" />
+            </div>
+            <p class="text-center mt-8 text-sm opacity-80">Securely manage patient records, appointments, and hospital operations</p>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="md:w-1/2 bg-white p-10 flex flex-col justify-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-1">Welcome Back</h2>
+            <p class="text-gray-600 mb-8">Please login to access your account</p>
+
+            {% if form.errors %}
+                <div class="mb-4 text-sm text-red-600">
+                    Invalid username or password. Please try again.
+                </div>
+            {% endif %}
+
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" name="username" id="username"
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 input-focus transition"
+                        placeholder="Enter your username" required>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" name="password" id="password"
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 input-focus transition"
+                        placeholder="Enter your password" required>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                    </div>
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-500">Forgot password?</a>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg login-btn transition duration-300">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-gray-500">
+                Don't have an account? <a href="#" class="text-blue-600 hover:text-blue-500 font-medium">Contact admin</a>
+            </div>
+
+            <div class="mt-8 border-t border-gray-200 pt-6">
+                <p class="text-xs text-gray-500 text-center">
+                    © 2023 MedCare HMS. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

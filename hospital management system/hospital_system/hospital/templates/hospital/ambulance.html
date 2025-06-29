@@ -1,0 +1,63 @@
+{% extends 'hospital/base.html' %}
+{% block content %}
+<div class="p-6 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Ambulance Services</h2>
+
+    <!-- Add Ambulance Button -->
+    <div class="mb-4">
+        <a href="{% url 'add_ambulance' %}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            + Add New Ambulance
+        </a>
+    </div>
+
+    <!-- Search Bar -->
+    <form method="GET" class="mb-4 flex items-center">
+        <input type="text" name="search" placeholder="Search by driver or number"
+               class="w-full md:w-1/2 px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+        <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Search
+        </button>
+    </form>
+
+    <!-- Ambulance List Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border rounded">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border text-left">Vehicle Number</th>
+                    <th class="px-4 py-2 border text-left">Driver Name</th>
+                    <th class="px-4 py-2 border text-left">Contact</th>
+                    <th class="px-4 py-2 border text-left">Status</th>
+                    <th class="px-4 py-2 border text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if ambulances %}
+                    {% for amb in ambulances %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-2 border">{{ amb.vehicle_number }}</td>
+                            <td class="px-4 py-2 border">{{ amb.driver_name }}</td>
+                            <td class="px-4 py-2 border">{{ amb.contact }}</td>
+                            <td class="px-4 py-2 border">
+                                {% if amb.is_available %}
+                                    <span class="text-green-600 font-semibold">Available</span>
+                                {% else %}
+                                    <span class="text-red-600 font-semibold">Busy</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-4 py-2 border flex gap-2">
+                                <a href="{% url 'edit_ambulance' amb.id %}" class="text-blue-600 hover:underline">Edit</a>
+                                <a href="{% url 'delete_ambulance' amb.id %}" class="text-red-600 hover:underline">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center px-4 py-4 border text-gray-500">No ambulance found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

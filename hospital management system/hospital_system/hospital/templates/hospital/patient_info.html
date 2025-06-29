@@ -1,0 +1,34 @@
+{% extends "hospital/base.html" %}
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Patient Info</h2>
+
+    <p class="text-gray-600">
+        This page will show detailed information about a selected patient.
+    </p>
+
+    <!-- Sample Table (you can replace with dynamic content later) -->
+    <div class="mt-6 overflow-x-auto">
+        <table class="min-w-full border rounded">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border">ID</th>
+                    <th class="px-4 py-2 border">Name</th>
+                    <th class="px-4 py-2 border">Age</th>
+                    <th class="px-4 py-2 border">Gender</th>
+                    <th class="px-4 py-2 border">Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="px-4 py-2 border">1</td>
+                    <td class="px-4 py-2 border">Ravi Kumar</td>
+                    <td class="px-4 py-2 border">30</td>
+                    <td class="px-4 py-2 border">Male</td>
+                    <td class="px-4 py-2 border">Cardiology</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
